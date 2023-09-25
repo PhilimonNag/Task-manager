@@ -1,0 +1,31 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "Task manger App ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilimonNag/Task-manager.git"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs",
+    "crud"
+  ],
+  "author": "Philimon Nag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhilimonNag/Task-manager/issues"
+  },
+  "homepage": "https://github.com/PhilimonNag/Task-manager#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
