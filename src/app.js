@@ -13,6 +13,28 @@ app.get('/tasks', (req, res) => {
         tasks
     })
 })
+app.get('/tasks/:id',(req,res)=>{
+     let id = req.params.id;
+     if(!req.params.hasOwnProperty('id')){
+     res.status(400).send({
+        status:false,
+        message:'Please provide Id'
+     });
+     }
+     let task=tasks.find((e)=>e.id==id);
+     if(!task){
+        res.status(400).send({
+        status:false,
+        message:`task not found for id :${id}`
+     });
+     }else{
+        res.status(200).send({
+           status:true,
+           message:`task found`,
+           result:task 
+        })
+     }
+})
 app.post('/tasks', (req, res) => {
     let params = req.body
     let id = tasks.length + 1;
@@ -27,15 +49,22 @@ app.post('/tasks', (req, res) => {
 })
 app.put('/tasks/:id', (req, res) => {
     const { title, description, completion } = req.body
-    id = req.params.id;
-    if (title || description || completion) {
-        const data=tasks.find(e => e.id == id)
-        if(!data){
-        res.status(404).json({
+    let id = req.params.id;
+    if(!req.params.hasOwnProperty('id')){
+        res.status(400).json({
+            status:false,
+            message:"Please provide id"
+        })
+    }
+    let task=tasks.find((e)=>e.id==id)
+    if(!task){
+      res.status(400).json({
             status:false,
             message:"Please provide valid id"
-        })
-        }else{
+        })  
+    }
+    if (title || description || completion) {
+        const data=tasks.find(e => e.id == id)
             tasks.map((e) =>{
                 if(e.id == id){
                     if(req.body.hasOwnProperty('title')){
@@ -50,13 +79,19 @@ app.put('/tasks/:id', (req, res) => {
                 }
             })
             res.status(200).json({status:true,message:`Task updated for id:${id} Successfully`});
-        }
+        
 
     }
 
 })
 app.delete('/tasks/:id', (req, res) => {
     const id = req.params.id;
+    if(!req.params.hasOwnProperty('id')){
+        res.status(400).json({
+            status:false,
+            message:"Please provide id"
+        })
+    }
     const data = tasks.find(e => e.id == id)
     if (!data) {
         res.status(404).json({ status: false, message: `Task with id :${id} not found` })
