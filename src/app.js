@@ -38,17 +38,18 @@ app.put('/tasks/:id', (req, res) => {
         }else{
             tasks.map((e) =>{
                 if(e.id == id){
-                    if(req.body.hasOwnProperty(title)){
+                    if(req.body.hasOwnProperty('title')){
                         e.title=title
                     }
-                    if(req.body.hasOwnProperty(description)){
+                    if(req.body.hasOwnProperty('description')){
                         e.description=description
                     }
-                    if(req.body.hasOwnProperty(completion)){
+                    if(req.body.hasOwnProperty('completion')){
                         e.completion=completion;
                     }
                 }
             })
+            res.status(200).json({status:true,message:`Task updated for id:${id} Successfully`});
         }
 
     }
@@ -73,6 +74,6 @@ app.listen(PORT, (error) => {
     if (error) {
         console.log(error)
     } else {
-        console.log(`app is running on  http://localhost/${PORT}`)
+        console.log(`app is running on  http://localhost:${PORT}`)
     }
 })
